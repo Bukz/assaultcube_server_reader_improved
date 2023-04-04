@@ -84,12 +84,12 @@ def get_server_info_and_namelist(server_ip, port):
     # Convert mastermode value to "known" value
     if mastermode[0] == -128:
         mastermode, data, _ = unpack_helper("bb", data)
-        mastermode = "match"
+        mastermode = "MATCH"
 
     if mastermode in ((0, 1), (1, 1)):
-        mastermode = "open"
+        mastermode = "OPEN"
     elif mastermode in ((64, 1), (65, 1)):
-        mastermode = "private"
+        mastermode = "PRIVATE"
 
     playerlist = []
     while data != b"\x00": # Better check ?
