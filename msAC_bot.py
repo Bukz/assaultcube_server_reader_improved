@@ -52,19 +52,33 @@ gamemode_names = {
 intents = discord.Intents.default()
 bot = commands.Bot(command_prefix='!', intents=intents)
 
+last_color = 'null'
+
 def create_server_embed(server_info, ip, port):
+    global last_color
+
     title = clean_description(server_info["server_description"])
     mastermode_emoji = mastermode_emojis[server_info["mastermode"]]
     gamemode = gamemode_names[server_info["gamemode"]]
     map_name = server_info["server_map"]
     minutes_remaining = server_info["minutes_remaining"]
+    if gamemode == "Co-operative editing": # coop edit does not have minutes remaining
+        minutes_remaining = "infinity"
     online_players = f"{server_info['nb_connected_clients']}/{server_info['max_client']}"
-    connect_info = f"/connect {ip} {port - 1}"
+    #connect_info = f"/connect {ip} {port - 1}" // uncomment this line and comment line below to show /connect information in bot message
+    connect_info = ""
+    
+    color = random.randint(0, 0xFFFFFF)
+        
+    while color == last_color: # do not duplicate color used in previous server
+        color = random.randint(0, 0xFFFFFF)
+        
+    last_color = color
 
     embed = discord.Embed(
         title=f"{title} {mastermode_emoji} `{server_info['mastermode'].capitalize()}`",
-        description=f"**{gamemode}** on map **{map_name}**, **{minutes_remaining} minutes** remaining.\n**{online_players} online** players\n\n{connect_info}",
-        color=random.randint(0, 0xFFFFFF)
+        description=f"**{gamemode}** on map **{map_name}**, **{minutes_remaining} minutes** remaining.\n**{online_players} players** online\n\n{connect_info}",
+        color = last_color
     )
 
     embed.set_thumbnail(url="https://avatars.githubusercontent.com/u/5957666?s=200&v=4")
