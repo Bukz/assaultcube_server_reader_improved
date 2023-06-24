@@ -73,7 +73,7 @@ def create_server_embed(server_info, ip, port):
     
     color = random.randint(0, 0xFFFFFF)
     
-    # TODO: this should check a wider ranger of color values
+    # TODO: this should check a wider range of color values
     #       because the bot will still pick shades that are
     #       EXTREMELY close to the one that was previously
     #       used.
