@@ -12,7 +12,9 @@ from datetime import datetime, timedelta
 import json
 
 TOKEN = 'YOUR_BOT_TOKEN'
-CHANNEL_ID = YOUR_CHANNEL
+# CHANNEL_ID = 1120410715451302020 # // Bukz's Server - #assaultcube channel - just an example
+# YOU MUST MODIFY THE TOKEN = '' && THE CHANNEL_ID = NUMBERS LINES BEFORE LAUNCHING SCRIPT!!!
+CHANNEL_ID = 0000000000000000000
 
 last_message_id = None
 last_servers_update = None
@@ -65,11 +67,17 @@ def create_server_embed(server_info, ip, port):
     if gamemode == "Co-operative editing": # coop edit does not have minutes remaining
         minutes_remaining = "infinity"
     online_players = f"{server_info['nb_connected_clients']}/{server_info['max_client']}"
-    #connect_info = f"/connect {ip} {port - 1}" // uncomment this line and comment line below to show /connect information in bot message
-    connect_info = ""
+    connect_info = f"/connect {ip} {port - 1}"
+    print(connect_info) # log the /connect string
+    connect_info = "" # empty the connect string, you can comment this line out if you want the bot to show it in the message
     
     color = random.randint(0, 0xFFFFFF)
-        
+    
+    # TODO: this should check a wider ranger of color values
+    #       because the bot will still pick shades that are
+    #       EXTREMELY close to the one that was previously
+    #       used.
+    #
     while color == last_color: # do not duplicate color used in previous server
         color = random.randint(0, 0xFFFFFF)
         
