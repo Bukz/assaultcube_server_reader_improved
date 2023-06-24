@@ -76,7 +76,9 @@ def create_server_embed(server_info, ip, port):
     # TODO: this should check a wider range of color values
     #       because the bot will still pick shades that are
     #       EXTREMELY close to the one that was previously
-    #       used.
+    #       used. 
+    #       
+    #       example: https://i.postimg.cc/mk9VX5qR/untitled.png
     #
     while color == last_color: # do not duplicate color used in previous server
         color = random.randint(0, 0xFFFFFF)
